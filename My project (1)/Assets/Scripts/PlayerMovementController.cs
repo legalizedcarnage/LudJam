@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovementController : MonoBehaviour
 {
@@ -48,6 +49,8 @@ public class PlayerMovementController : MonoBehaviour
 
     void Start()
     {
+        joint = GetComponent<SpringJoint2D>();
+        joint.enabled = false;
         boxCollider2D = GetComponent<BoxCollider2D> ();
         rigidBody = GetComponent<Rigidbody2D> ();
         rigidBody.freezeRotation = true;
@@ -58,6 +61,9 @@ public class PlayerMovementController : MonoBehaviour
 
 
     void Update () {
+        if(Input.GetButtonDown("Fire2")) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
         if(grapplePower) {
             if (Input.GetMouseButtonDown(0)) {
                 StartGrapple();
@@ -214,7 +220,8 @@ public class PlayerMovementController : MonoBehaviour
         if (hit) {
             lastY = boxCollider2D.bounds.center.y;
             grapplePoint = hit.point;
-            joint = gameObject.AddComponent<SpringJoint2D>();
+            joint.enabled = true;
+            //joint = gameObject.AddComponent<SpringJoint2D>();
             joint.autoConfigureConnectedAnchor = false;
             joint.autoConfigureDistance = false;
             joint.distance = Vector2.Distance(boxCollider2D.bounds.center,hit.point)-0f;
@@ -230,12 +237,12 @@ public class PlayerMovementController : MonoBehaviour
     }
     void StopGrapple() {
         lr.positionCount = 0;
-        
-        Destroy(joint);
+        joint.enabled = false;
+        //Destroy(joint);
     }
     void DrawRope() {
         //If not grappling, don't draw rope
-        if (!joint) return;
+        if (!IsGrappling()) return;
 
         currentGrapplePosition = Vector2.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
         
@@ -244,7 +251,7 @@ public class PlayerMovementController : MonoBehaviour
     }
 
     public bool IsGrappling() {
-        return joint != null;
+        return joint.enabled;
     }
 
     public Vector2 GetGrapplePoint() {

@@ -2988,7 +2988,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 865cd13e51676ae46a74265dcc7dc46a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 515f9b6a55480c7439efce31c4266a0f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -4340,7 +4340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2551984185968783409, guid: 41b342f8560ed894da78dc879b741aa9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 172.25
+      value: 173.24
       objectReference: {fileID: 0}
     - target: {fileID: 2551984185968783409, guid: 41b342f8560ed894da78dc879b741aa9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4587,7 +4587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6178823442437778300, guid: 0f543a375b0ce464f822e4d1d4b2fdf9, type: 3}
       propertyPath: dashPower
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6178823442437778300, guid: 0f543a375b0ce464f822e4d1d4b2fdf9, type: 3}
       propertyPath: maxHealth
@@ -4687,6 +4687,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f543a375b0ce464f822e4d1d4b2fdf9, type: 3}
+--- !u!1 &6178823442928008422 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6178823442437778301, guid: 0f543a375b0ce464f822e4d1d4b2fdf9, type: 3}
+  m_PrefabInstance: {fileID: 6178823442928008421}
+  m_PrefabAsset: {fileID: 0}
+--- !u!231 &6178823442928008423
+SpringJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6178823442928008422}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 15.683368
+  m_DampingRatio: 0
+  m_Frequency: 1
 --- !u!1001 &6283335408116792511
 PrefabInstance:
   m_ObjectHideFlags: 0

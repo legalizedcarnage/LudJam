@@ -488,6 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e7e4f986fc48946a3c11634d87d9f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grapplePoint: {x: -6.05, y: 2.59}
 --- !u!1001 &547043557
 PrefabInstance:
   m_ObjectHideFlags: 0
