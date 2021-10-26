@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerMovementController : MonoBehaviour
 {
     //unityobjects
+    public AudioSource dashAudio;
     public CameraShake cameraShake;
     public ParticleSystem jumpParticles;
     public ParticleSystem dashParticles;
@@ -51,6 +52,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void Start()
     {
+        dashAudio = GetComponent<AudioSource>();
         joint = GetComponent<SpringJoint2D>();
         joint.enabled = false;
         boxCollider2D = GetComponent<BoxCollider2D> ();
@@ -63,9 +65,9 @@ public class PlayerMovementController : MonoBehaviour
 
 
     void Update () {
-        if(Input.GetButtonDown("Fire2")) {
+        /*if(Input.GetButtonDown("Fire2")) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        }*/
         if(grapplePower) {
             if (Input.GetMouseButtonDown(0)) {
                 StartGrapple();
@@ -91,7 +93,7 @@ public class PlayerMovementController : MonoBehaviour
         if(dashPower && shift && dashCooldown == maxDashCooldown && !IsGrounded()) {
             StopGrapple();
             dashParticles.Play();
-            
+            dashAudio.Play();
             multiplier = dashMultiplier;
             dashDuration--;
             dashCooldown--;
@@ -153,7 +155,7 @@ public class PlayerMovementController : MonoBehaviour
                     death();
                 }else {
                     float ratio = (health*1.0f)/maxHealth;
-                    spriteRenderer.color = new Color(ratio,ratio,ratio);
+                    //spriteRenderer.color = new Color(ratio,ratio,ratio);
                 }
             }
             lastY = boxCollider2D.bounds.center.y;
@@ -210,7 +212,7 @@ public class PlayerMovementController : MonoBehaviour
         
         health += 50;
         float ratio = (health*1.0f)/maxHealth;
-        spriteRenderer.color = new Color(ratio,ratio,ratio);
+        //spriteRenderer.color = new Color(ratio,ratio,ratio);
         if (health > maxHealth) {
             health = maxHealth;
         }
@@ -236,7 +238,7 @@ public class PlayerMovementController : MonoBehaviour
             joint.frequency = 1000f;
 
             lr.positionCount = 2;
-            currentGrapplePosition = boxCollider2D.bounds.center;
+            currentGrapplePosition = transform.position;
         }
     }
     void StopGrapple() {
@@ -248,9 +250,9 @@ public class PlayerMovementController : MonoBehaviour
         //If not grappling, don't draw rope
         if (!IsGrappling()) return;
 
-        currentGrapplePosition = Vector2.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
+        currentGrapplePosition = Vector2.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 10f);
         
-        lr.SetPosition(0, boxCollider2D.bounds.center);
+        lr.SetPosition(0, transform.position);
         lr.SetPosition(1, currentGrapplePosition);
     }
 

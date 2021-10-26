@@ -1,5 +1,2 @@
 sound effects
-tutorial/controls
-contrast issues
-obstacles that cant be grappled
 make ending better
