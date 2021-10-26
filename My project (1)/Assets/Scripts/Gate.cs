@@ -14,7 +14,13 @@ public class Gate : MonoBehaviour
         float timer = col.GetComponent<PlayerMovementController>().GetTime();
         float minutes = Mathf.Floor(timer / 60);
         float seconds = Mathf.RoundToInt(timer%60);
-        string data = "Completed: " + minutes + ":" + seconds;
+        string data = "Completed: " + minutes + ":";
+        if(seconds < 10) {
+            data += "0" + seconds;
+        }
+        else {
+            data += seconds;
+            }
         clock.gameObject.SetActive(true);
         clock.text = data;
         //Debug.Log(minutes + "." + seconds);

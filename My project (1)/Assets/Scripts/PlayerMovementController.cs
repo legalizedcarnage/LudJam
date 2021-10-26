@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 public class PlayerMovementController : MonoBehaviour
 {
     //unityobjects
+    public CameraShake cameraShake;
     public ParticleSystem jumpParticles;
     public ParticleSystem dashParticles;
     [SerializeField] private LayerMask terrainLayerMask;
+    [SerializeField] private LayerMask grapplelessLayerMask;
     private BoxCollider2D boxCollider2D;
     private Rigidbody2D rigidBody;
     SpriteRenderer spriteRenderer;
@@ -89,6 +91,7 @@ public class PlayerMovementController : MonoBehaviour
         if(dashPower && shift && dashCooldown == maxDashCooldown && !IsGrounded()) {
             StopGrapple();
             dashParticles.Play();
+            
             multiplier = dashMultiplier;
             dashDuration--;
             dashCooldown--;
@@ -195,7 +198,8 @@ public class PlayerMovementController : MonoBehaviour
     }
     bool IsGrounded() {
         float extraHeight = .11f;
-        RaycastHit2D raycastHit =Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size+ new Vector3(.01f,0f,0f), 0f, Vector2.down, extraHeight,terrainLayerMask);
+
+        RaycastHit2D raycastHit =Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size+ new Vector3(.01f,0f,0f), 0f, Vector2.down, extraHeight,terrainLayerMask | grapplelessLayerMask);
         
         return raycastHit.collider != null;
     }
